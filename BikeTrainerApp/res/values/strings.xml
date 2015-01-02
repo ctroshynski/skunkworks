@@ -22,5 +22,6 @@
     <string name="lblRPM">RPM</string>
     <string name="lblReps">Reps</string>
     <string name="lblRepTime">Rep time</string>
+    <string name="lblRestTime">Rest time</string>
 
 </resources>

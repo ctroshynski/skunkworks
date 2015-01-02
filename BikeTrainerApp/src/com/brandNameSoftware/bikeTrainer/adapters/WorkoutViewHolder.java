@@ -10,6 +10,7 @@ public class WorkoutViewHolder extends ViewHolder {
 
 	TextView txtViewZone;
 	TextView txtViewRepTime;
+	TextView txtViewRestTime;
 	TextView txtViewFTP;
 	TextView txtViewReps;
 	TextView txtViewHR;
@@ -18,6 +19,7 @@ public class WorkoutViewHolder extends ViewHolder {
 		super(itemView);
 		txtViewZone = (TextView) itemView.findViewById(R.id.txtViewZone);
 		txtViewRepTime = (TextView) itemView.findViewById(R.id.txtViewRepTime);
+		txtViewRestTime = (TextView) itemView.findViewById(R.id.txtViewRestTime);
 		txtViewFTP = (TextView) itemView.findViewById(R.id.txtViewFTP);
 		txtViewReps = (TextView) itemView.findViewById(R.id.txtViewReps);
 		txtViewHR = (TextView) itemView.findViewById(R.id.txtViewHR);

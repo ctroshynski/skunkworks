@@ -77,6 +77,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
 	public void onBindViewHolder(WorkoutViewHolder viewHolder, int position) {
 		viewHolder.txtViewZone.setText(Integer.toString(workoutSets.get(position).getTargetZone()));
 		viewHolder.txtViewRepTime.setText(WorkoutMaths.formatMillisAsTime(workoutSets.get(position).getTimePerRep() * 1000));
+		viewHolder.txtViewRestTime.setText(WorkoutMaths.formatMillisAsTime(workoutSets.get(position).getRestTimePerRep() * 1000));
 		
 		WorkoutConstraints currentConstraint = workoutConstraints.get(workoutSets.get(position).getTargetZone());
 		viewHolder.txtViewFTP.setText(currentConstraint.getMinPower() + " - " + currentConstraint.getMaxPower());
