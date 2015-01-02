@@ -1,9 +1,0 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="android:Theme.Material.Light">
-        <item name="android:colorPrimary">@color/primary</item>
-	    <item name="android:colorAccent">@color/accent</item>
-	    <item name="android:textColorPrimary">@color/light_text</item>
-	    <item name="android:textColor">@color/dark_text</item>
-    </style>
-</resources>
