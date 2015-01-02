@@ -24,6 +24,7 @@
     
     <color name="primary">#6FBFC9</color>
     <color name="accent">#C2D631</color>
+    <color name="accent_transparent">#80C2D631</color>
     <color name="tertiary">#1E0F5C</color>
     <color name="fourth">#1C0542</color>
     <color name="light_text">#FFFFFF</color>

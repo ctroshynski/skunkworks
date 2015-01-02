@@ -24,7 +24,7 @@ import com.brandNameSoftware.workoutGenerator.utils.WorkoutMaths;
 
 public class DisplayWorkoutActivity extends ActionBarActivity
 {
-	
+	WorkoutAdapter workoutAdapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,18 +45,9 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		listViewWorkoutSets.setLayoutManager(new LinearLayoutManager(this));
 		listViewWorkoutSets.setItemAnimator(new DefaultItemAnimator());
 		
-		listViewWorkoutSets.setAdapter(new WorkoutAdapter(this, mainSets, workoutConstraints));
+		workoutAdapter = new WorkoutAdapter(this, mainSets, workoutConstraints);
+		listViewWorkoutSets.setAdapter(workoutAdapter);
 		
-		int totalWorkoutTime = 0;
-		for (WorkoutSet mainSet : mainSets) 
-		{
-			System.out.println(mainSet.toString());
-			totalWorkoutTime += mainSet.getTotalSetTime();
-		}
-		System.out.println("Total workout time is: " + totalWorkoutTime/60 + " minutes");
-		
-		/*TextView setCountTextView = (TextView) findViewById(R.id.txtViewRepCountdown);
-		setCountTextView.setText(Integer.toString(mainSets.get(0).getTotalSetTime()));*/
 		
 		CountDownTimer totalWorkoutTimer = setupTimer(mainSets);
 		totalWorkoutTimer.start();
@@ -141,12 +132,14 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 			
 			if(remainingRepTimeMillis <= 0)
 			{
+				
 				if(isWorkingSet)
 				{
 					//switch to the resting portion
 					this.timeLeftExcludingCurrentRep -= this.currentSet.getTimePerRep() * 1000;
 					remainingRepTimeMillis = Long.valueOf(currentSet.getRestTimePerRep()) * 1000;
 					currentRepTimeMillis = Long.valueOf(currentSet.getRestTimePerRep()) * 1000;
+
 					isWorkingSet = false;
 				}
 				else
@@ -172,9 +165,6 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 							currentSet = mainSets.get(currentSetIndex);
 							remainingRepTimeMillis = Long.valueOf(currentSet.getTimePerRep()) * 1000;
 							currentRepTimeMillis = Long.valueOf(currentSet.getTimePerRep()) * 1000;
-							/*CardView cardView = (CardView)findViewById(R.id.card_view);
-							View nextSet = cardView.getChildAt(currentSetIndex);
-							cardView.scrollTo((int)nextSet.getX(), (int)nextSet.getY());*/
 						}
 					}
 				}

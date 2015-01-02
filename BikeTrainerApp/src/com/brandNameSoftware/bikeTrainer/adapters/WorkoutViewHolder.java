@@ -1,10 +1,10 @@
 package com.brandNameSoftware.bikeTrainer.adapters;
 
-import com.brandNameSoftware.bikeTrainer.R;
-
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 import android.widget.TextView;
+
+import com.brandNameSoftware.bikeTrainer.R;
 
 public class WorkoutViewHolder extends ViewHolder {
 
