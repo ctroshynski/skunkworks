@@ -20,7 +20,7 @@
     <string name="lblFTP">FTP</string>
     <string name="lblHR">HR</string>
     <string name="lblRPM">RPM</string>
-    <string name="lblReps"> reps at:</string>
+    <string name="lblReps">\u0020 reps at:</string>
     <string name="lblRepTime">Rep time</string>
     <string name="lblRestTime">Rest time</string>
 

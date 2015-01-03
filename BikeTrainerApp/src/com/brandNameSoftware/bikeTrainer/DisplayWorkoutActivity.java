@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -47,7 +51,6 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		
 		workoutAdapter = new WorkoutAdapter(this, mainSets, workoutConstraints);
 		listViewWorkoutSets.setAdapter(workoutAdapter);
-		
 		
 		CountDownTimer totalWorkoutTimer = setupTimer(mainSets);
 		totalWorkoutTimer.start();
@@ -100,6 +103,47 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		return super.onOptionsItemSelected(item);
 	}
 	
+	private void setActiveBackgroundColor(int currentSetIndex, boolean isWorkingSet, boolean wasSetIncremented)
+	{
+		RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listViewWorkoutSets);
+		LinearLayoutManager layoutManager = (LinearLayoutManager)recyclerView.getLayoutManager();
+		CardView currentCard = null;
+		
+		if(layoutManager.findFirstVisibleItemPosition() <= currentSetIndex && layoutManager.findLastVisibleItemPosition() >= currentSetIndex)
+		{
+			//if the card isn't visible, then we can't find it in the layout manager
+			currentCard = (CardView)layoutManager.findViewByPosition(currentSetIndex);
+			
+			ViewGroup currentLayout = null;
+			ViewGroup previousLayout = null;
+			Drawable previousBackground = null;
+			currentCard = (CardView)recyclerView.getLayoutManager().findViewByPosition(currentSetIndex);
+			
+			if(isWorkingSet)
+			{
+				currentLayout = (ViewGroup)currentCard.findViewById(R.id.layoutWorkoutDetails);
+				
+				if(wasSetIncremented)
+				{
+					//have to get the previous card if we moved sets
+					currentCard = (CardView)recyclerView.getLayoutManager().findViewByPosition(currentSetIndex - 1);
+				}
+				
+				previousLayout = (ViewGroup)currentCard.findViewById(R.id.layoutRest);
+				previousBackground = getResources().getDrawable(R.drawable.layout_top_border);
+			}
+			else
+			{
+				currentLayout = (ViewGroup)currentCard.findViewById(R.id.layoutRest);
+				previousLayout = (ViewGroup)currentCard.findViewById(R.id.layoutWorkoutDetails);
+				previousBackground = new ColorDrawable(getResources().getColor(R.color.transparent));
+			}
+			
+			currentLayout.setBackgroundColor(getResources().getColor(R.color.accent_transparent));
+			previousLayout.setBackground(previousBackground);
+		}
+	}
+	
 	public class WorkoutCountDownTimer extends CountDownTimer
 	{
 		ArrayList<WorkoutSet> mainSets = new ArrayList<WorkoutSet>();
@@ -132,14 +176,14 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 			
 			if(remainingRepTimeMillis <= 0)
 			{
-				
+				boolean isSetIncremented = false;
 				if(isWorkingSet)
 				{
 					//switch to the resting portion
 					this.timeLeftExcludingCurrentRep -= this.currentSet.getTimePerRep() * 1000;
 					remainingRepTimeMillis = Long.valueOf(currentSet.getRestTimePerRep()) * 1000;
 					currentRepTimeMillis = Long.valueOf(currentSet.getRestTimePerRep()) * 1000;
-
+					
 					isWorkingSet = false;
 				}
 				else
@@ -163,11 +207,14 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 						if(mainSets.size() > currentSetIndex)
 						{
 							currentSet = mainSets.get(currentSetIndex);
-							remainingRepTimeMillis = Long.valueOf(currentSet.getTimePerRep()) * 1000;
+							remainingRepTimeMillis = Long.valueOf(currentSet.getTimePerRep()) * 1000;							
 							currentRepTimeMillis = Long.valueOf(currentSet.getTimePerRep()) * 1000;
+							isSetIncremented = true;
 						}
 					}
 				}
+
+				setActiveBackgroundColor(currentSetIndex, isWorkingSet, isSetIncremented);
 			}
 			
 			repCountTextView.setText(WorkoutMaths.formatMillisAsTime(remainingRepTimeMillis));
@@ -188,6 +235,5 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		public void setMainSet(ArrayList<WorkoutSet> mainSets) {
 			this.mainSets = mainSets;
 		}
-
 	}
 }
