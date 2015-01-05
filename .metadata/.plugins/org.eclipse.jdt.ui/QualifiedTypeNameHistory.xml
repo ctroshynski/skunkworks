@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.widget.RelativeLayout"/>
+<fullyQualifiedTypeName name="android.widget.LinearLayout"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.adapters.WorkoutAdapter"/>
+<fullyQualifiedTypeName name="android.support.v7.widget.CardView"/>
+<fullyQualifiedTypeName name="android.text.Layout"/>
+<fullyQualifiedTypeName name="android.view.ViewGroup"/>
+<fullyQualifiedTypeName name="android.content.res.Resources"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.R.id"/>
+<fullyQualifiedTypeName name="android.support.v7.widget.RecyclerView.LayoutManager"/>
+<fullyQualifiedTypeName name="android.support.v7.widget.LinearLayoutManager"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.R.drawable"/>
+<fullyQualifiedTypeName name="android.graphics.drawable.Drawable"/>
+<fullyQualifiedTypeName name="android.graphics.drawable.ColorDrawable"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.R.color"/>
+</qualifiedTypeNameHistroy>

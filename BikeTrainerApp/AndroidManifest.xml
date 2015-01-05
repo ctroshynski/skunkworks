@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brandNameSoftware.bikeTrainer"
-    android:versionCode="3"
-    android:versionName="1.2" >
+    android:versionCode="4"
+    android:versionName="1.3" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -26,6 +26,13 @@
             android:name=".DisplayWorkoutActivity"
             android:label="@string/title_activity_display_workout"
             android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.brandname.biketrainer.MainActivity" />
+        </activity>
+        <activity 
+            android:label="@string/title_activity_preferences"
+            android:name=".AppPreferencesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.brandname.biketrainer.MainActivity" />

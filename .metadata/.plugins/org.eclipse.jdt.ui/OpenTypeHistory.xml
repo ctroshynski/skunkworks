@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer{DisplayWorkoutActivity.java[DisplayWorkoutActivity" modifiers="1" timestamp="1420312242956"/>
+<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.adapters{WorkoutAdapter.java[WorkoutAdapter" modifiers="1" timestamp="1420311457882"/>
+<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.adapters{WorkoutViewHolder.java[WorkoutViewHolder" modifiers="1" timestamp="1420232909857"/>
+<typeInfo handle="=TestActivity/C:\/Users\/matthew.brand\/Documents\/Eclipes\/sdk\/platforms\/android-19\/android.jar&lt;android.widget(RelativeLayout.class[RelativeLayout" modifiers="33" timestamp="1416496517977"/>
+</typeInfoHistroy>

@@ -14,6 +14,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_display_workout">Workout</string>
+    <string name="title_activity_preferences">Preferences</string>
     <string name="RepCountdownRemaining">0</string>
     <string name="lblTotalCountdownRemaining">Total time remaining in workout: </string>
     <string name="lblZone">Zone</string>
@@ -23,5 +24,14 @@
     <string name="lblReps">\u0020 reps at:</string>
     <string name="lblRepTime">Rep time</string>
     <string name="lblRestTime">Rest time</string>
+    
+    
+    <!-- Preferences Strings -->
+    <string name="lblPrefFTPHeader">FTP</string>
+    <string name="lblPrefFTPSummary">What is your FTP?</string>
+    <string name="lblPrefHRHeader">Max HR</string>
+    <string name="lblPrefHRSummary">What is your Max heart rate?</string>
+    <string name="lblPrefDisplayTypeHeader">Values instead of Percentage</string>
+    <string name="lblPrefDisplayTypeSummary">Display FTP/HR as absolute numbers?</string>
 
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory>
+		<CheckBoxPreference
+			android:title="@string/lblPrefDisplayTypeHeader"
+			android:summary="@string/lblPrefDisplayTypeSummary"
+			android:key="displayType"
+			android:defaultValue="false" />
+		<EditTextPreference android:title="@string/lblPrefFTPHeader"
+			android:key="prefftp"
+			android:inputType="number"
+			android:textColor="@color/black"
+			android:dependency="displayType"
+			android:defaultValue="200">
+		</EditTextPreference>
+		<EditTextPreference android:title="@string/lblPrefHRHeader"
+			android:key="prefmaxHR"
+			android:inputType="number"
+			android:textColor="@color/black"
+			android:dependency="displayType"
+			android:defaultValue="190">
+		</EditTextPreference>
+    </PreferenceCategory>
+</PreferenceScreen>

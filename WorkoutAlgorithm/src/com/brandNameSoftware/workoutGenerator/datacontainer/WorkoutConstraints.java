@@ -95,20 +95,4 @@ public class WorkoutConstraints implements Serializable {
 	public void setMaxSetTimePerWorkout(int maxSetTimePerWorkout) {
 		this.maxSetTimePerWorkout = maxSetTimePerWorkout;
 	}
-	
-	public String getHRRangeString()
-	{
-		String hrRange = "";
-		
-		if(this.getMinHR() < 0 || this.getMaxHR() < 0)
-		{
-			hrRange = "MAX";
-		}
-		else
-		{
-			hrRange = this.getMinHR() + " - " + this.getMaxHR() + "% Max HR";
-		}
-		
-		return hrRange;
-	}
 }

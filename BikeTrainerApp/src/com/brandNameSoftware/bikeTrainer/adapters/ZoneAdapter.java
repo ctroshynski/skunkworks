@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.brandNameSoftware.bikeTrainer.R;
+import com.brandNameSoftware.bikeTrainer.utils.DisplayHelper;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutConstraints;
 
 public class ZoneAdapter extends BaseAdapter {
@@ -48,8 +49,8 @@ public class ZoneAdapter extends BaseAdapter {
 			WorkoutConstraints currentConstraint = getItem(position);
 			
 			txtViewZoneHeader.setText("Zone " + currentConstraint.getZone());
-			txtViewZoneDetails.setText("Power - " + currentConstraint.getMinPower() + "-" + currentConstraint.getMaxPower() + "% FTP    HR - " + 
-					currentConstraint.getHRRangeString());
+			txtViewZoneDetails.setText("Power - " + DisplayHelper.getFTPPercentageDisplayRange(currentConstraint.getMinPower(), currentConstraint.getMaxPower()) + "    HR - " + 
+					DisplayHelper.getHRPercentageDisplayRange(currentConstraint.getMinHR(), currentConstraint.getMaxHR()));
 		}
 		else
 		{

@@ -3,11 +3,14 @@ package com.brandNameSoftware.bikeTrainer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.brandNameSoftware.bikeTrainer.adapters.WorkoutAdapter;
+import com.brandNameSoftware.bikeTrainer.beans.UserPrefs;
 import com.brandNameSoftware.workoutGenerator.WorkoutGenerator;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutConstraints;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutPrefs;
@@ -29,6 +33,9 @@ import com.brandNameSoftware.workoutGenerator.utils.WorkoutMaths;
 public class DisplayWorkoutActivity extends ActionBarActivity
 {
 	WorkoutAdapter workoutAdapter;
+	ArrayList<WorkoutSet> mainSets = null;
+	HashMap<Integer, WorkoutConstraints> workoutConstraints = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,23 +44,38 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		
 		Intent intent = getIntent();
 		WorkoutPrefs workoutPrefs = (WorkoutPrefs) intent.getSerializableExtra(MainActivity.WORKOUT_PREFERENCES);
-		HashMap<Integer, WorkoutConstraints>  workoutConstraints = (HashMap<Integer, WorkoutConstraints> ) intent.getSerializableExtra(MainActivity.WORKOUT_CONSTRAINTS);
+		this.workoutConstraints = (HashMap<Integer, WorkoutConstraints> ) intent.getSerializableExtra(MainActivity.WORKOUT_CONSTRAINTS);
 		
-		ArrayList<WorkoutSet> mainSets = generateWorkout(workoutPrefs, workoutConstraints);
+		this.mainSets = generateWorkout(workoutPrefs, workoutConstraints);
 		
 		TextView totalCounTextView = (TextView) findViewById(R.id.txtViewTotalCountdown);
 		totalCounTextView.setText(Integer.toString(workoutPrefs.getTime()));
 
+		
+		CountDownTimer totalWorkoutTimer = setupTimer(mainSets);
+		totalWorkoutTimer.start();
+	}
+	
+	@Override
+	protected void onResume()
+	{		
+		UserPrefs userPrefs = new UserPrefs();
+		
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+
+		userPrefs.setFTP(Integer.parseInt(settings.getString("prefftp", "0")));
+		userPrefs.setMaxHR(Integer.parseInt(settings.getString("prefmaxHR", "0")));
+		userPrefs.setDisplayAsAbsolute(settings.getBoolean("displayType", false));
+		
 		RecyclerView listViewWorkoutSets = (RecyclerView) findViewById(R.id.listViewWorkoutSets);
 		
 		listViewWorkoutSets.setLayoutManager(new LinearLayoutManager(this));
 		listViewWorkoutSets.setItemAnimator(new DefaultItemAnimator());
 		
-		workoutAdapter = new WorkoutAdapter(this, mainSets, workoutConstraints);
+		workoutAdapter = new WorkoutAdapter(this, this.mainSets, this.workoutConstraints, userPrefs);
 		listViewWorkoutSets.setAdapter(workoutAdapter);
 		
-		CountDownTimer totalWorkoutTimer = setupTimer(mainSets);
-		totalWorkoutTimer.start();
+		super.onResume();
 	}
 
 	private CountDownTimer setupTimer(ArrayList<WorkoutSet> workoutSets)
@@ -84,24 +106,21 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		return mainSets;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.display_workout, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	Intent intent = new Intent();
+    	intent.setClass(DisplayWorkoutActivity.this, AppPreferencesActivity.class);
+        startActivityForResult(intent, 0); 
+  
+        return true;
+    }
 	
 	private void setActiveBackgroundColor(int currentSetIndex, boolean isWorkingSet, boolean wasSetIncremented)
 	{
@@ -214,6 +233,8 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 					}
 				}
 
+				workoutAdapter.setWorkingRep(isWorkingSet);
+				workoutAdapter.setActiveIndex(currentSetIndex);
 				setActiveBackgroundColor(currentSetIndex, isWorkingSet, isSetIncremented);
 			}
 			
