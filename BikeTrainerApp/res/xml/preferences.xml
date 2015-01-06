@@ -21,4 +21,16 @@
 			android:defaultValue="190">
 		</EditTextPreference>
     </PreferenceCategory>
+	<EditTextPreference android:title="@string/lblPrefWarmupTimeHeader"
+		android:key="prefwarmupTime"
+		android:inputType="number"
+		android:textColor="@color/black"
+		android:defaultValue="10">
+	</EditTextPreference>
+	<EditTextPreference android:title="@string/lblPrefCooldownTimeHeader"
+		android:key="prefcooldownTime"
+		android:inputType="number"
+		android:textColor="@color/black"
+		android:defaultValue="5">
+	</EditTextPreference>
 </PreferenceScreen>

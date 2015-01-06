@@ -33,49 +33,62 @@ import com.brandNameSoftware.workoutGenerator.utils.WorkoutMaths;
 public class DisplayWorkoutActivity extends ActionBarActivity
 {
 	WorkoutAdapter workoutAdapter;
-	ArrayList<WorkoutSet> mainSets = null;
+	ArrayList<WorkoutSet> workoutSets = null;
 	HashMap<Integer, WorkoutConstraints> workoutConstraints = null;
+	UserPrefs userPrefs = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_workout);
 	    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+		readUserPrefs();
 		
 		Intent intent = getIntent();
 		WorkoutPrefs workoutPrefs = (WorkoutPrefs) intent.getSerializableExtra(MainActivity.WORKOUT_PREFERENCES);
 		this.workoutConstraints = (HashMap<Integer, WorkoutConstraints> ) intent.getSerializableExtra(MainActivity.WORKOUT_CONSTRAINTS);
 		
-		this.mainSets = generateWorkout(workoutPrefs, workoutConstraints);
+		this.workoutSets = generateWorkout(workoutPrefs, workoutConstraints);
 		
 		TextView totalCounTextView = (TextView) findViewById(R.id.txtViewTotalCountdown);
 		totalCounTextView.setText(Integer.toString(workoutPrefs.getTime()));
 
 		
-		CountDownTimer totalWorkoutTimer = setupTimer(mainSets);
+		CountDownTimer totalWorkoutTimer = setupTimer(workoutSets);
 		totalWorkoutTimer.start();
 	}
 	
 	@Override
 	protected void onResume()
 	{		
-		UserPrefs userPrefs = new UserPrefs();
-		
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-
-		userPrefs.setFTP(Integer.parseInt(settings.getString("prefftp", "0")));
-		userPrefs.setMaxHR(Integer.parseInt(settings.getString("prefmaxHR", "0")));
-		userPrefs.setDisplayAsAbsolute(settings.getBoolean("displayType", false));
+		readUserPrefs();
 		
 		RecyclerView listViewWorkoutSets = (RecyclerView) findViewById(R.id.listViewWorkoutSets);
 		
 		listViewWorkoutSets.setLayoutManager(new LinearLayoutManager(this));
 		listViewWorkoutSets.setItemAnimator(new DefaultItemAnimator());
 		
-		workoutAdapter = new WorkoutAdapter(this, this.mainSets, this.workoutConstraints, userPrefs);
+		workoutAdapter = new WorkoutAdapter(this, this.workoutSets, this.workoutConstraints, userPrefs);
 		listViewWorkoutSets.setAdapter(workoutAdapter);
 		
 		super.onResume();
+	}
+	
+	private void readUserPrefs()
+	{
+		if(userPrefs == null)
+		{
+			userPrefs = new UserPrefs();
+		}
+		
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+
+		userPrefs.setFTP(Integer.parseInt(settings.getString(AppPreferencesActivity.PREFERENCE_FTP_KEY, "0")));
+		userPrefs.setMaxHR(Integer.parseInt(settings.getString(AppPreferencesActivity.PREFERENCE_MAXHR_KEY, "0")));
+		userPrefs.setDisplayAsAbsolute(settings.getBoolean(AppPreferencesActivity.PREFERENCE_DISPLAY_TYPE_KEY, false));
+		userPrefs.setWarmupTime(Integer.parseInt(settings.getString(AppPreferencesActivity.PREFERENCE_WARMUP_TIME_KEY, "0")));
+		userPrefs.setCoolDownTime(Integer.parseInt(settings.getString(AppPreferencesActivity.PREFERENCE_COOLDOWN_TIME_KEY, "0")));
 	}
 
 	private CountDownTimer setupTimer(ArrayList<WorkoutSet> workoutSets)
@@ -94,16 +107,36 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 	
 	private ArrayList<WorkoutSet> generateWorkout(WorkoutPrefs workoutPrefs, HashMap<Integer, WorkoutConstraints> workoutConstraints)
 	{
+		//workout algorithm only generates the main sets, so need to adjust for that.
+		workoutPrefs.setTime(workoutPrefs.getTime() - (this.userPrefs.getWarmupTime() * 60) - (this.userPrefs.getCoolDownTime() * 60));
 		WorkoutGenerator generator = new WorkoutGenerator(workoutConstraints, workoutPrefs);
-		ArrayList<WorkoutSet> mainSets = generator.generateMainSets();
+		ArrayList<WorkoutSet> workoutSets = generator.generateMainSets();
+		
+		//add a dummy warmup set to the beginning
+		WorkoutSet warmupSet = new WorkoutSet();
+		warmupSet.setNumberOfReps(1);
+		warmupSet.setRestTimePerRep(0);
+		warmupSet.setTargetZone(0);
+		warmupSet.setTimePerRep(this.userPrefs.getWarmupTime() * 60);
+		workoutSets.add(0, warmupSet);
+		
+		//add a dummy cooldown set to the beginning
+		WorkoutSet cooldownSet = new WorkoutSet();
+		cooldownSet.setNumberOfReps(1);
+		cooldownSet.setRestTimePerRep(0);
+		cooldownSet.setTargetZone(0);
+		cooldownSet.setTimePerRep(this.userPrefs.getCoolDownTime() * 60);
+		workoutSets.add(cooldownSet);
 		
 		int totalWorkoutTime = 0;
-		for (WorkoutSet mainSet : mainSets) 
+		for (WorkoutSet mainSet : workoutSets) 
 		{
+			System.out.println(mainSet);
 			totalWorkoutTime += mainSet.getTotalSetTime();
 		}
 		
-		return mainSets;
+		System.out.println("total workout time " + totalWorkoutTime);
+		return workoutSets;
 	}
 
     @Override

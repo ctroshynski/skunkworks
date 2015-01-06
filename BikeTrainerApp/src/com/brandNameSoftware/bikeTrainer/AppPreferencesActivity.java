@@ -9,8 +9,11 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
 public class AppPreferencesActivity extends PreferenceActivity {
-	private static final String PREFERENCE_FTP_KEY = "prefftp";
-	private static final String PREFERENCE_MAXHR_KEY = "prefmaxHR";
+	public static final String PREFERENCE_FTP_KEY = "prefftp";
+	public static final String PREFERENCE_MAXHR_KEY = "prefmaxHR";
+	public static final String PREFERENCE_DISPLAY_TYPE_KEY = "displayType";
+	public static final String PREFERENCE_WARMUP_TIME_KEY = "prefwarmupTime";
+	public static final String PREFERENCE_COOLDOWN_TIME_KEY = "prefcooldownTime";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,19 +30,26 @@ public class AppPreferencesActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.preferences);
             findPreference(PREFERENCE_FTP_KEY).setSummary(getPreferenceScreen().getSharedPreferences().getString(PREFERENCE_FTP_KEY, "") + " Watts");
             findPreference(PREFERENCE_MAXHR_KEY).setSummary(getPreferenceScreen().getSharedPreferences().getString(PREFERENCE_MAXHR_KEY, "") + " bpm");
+            findPreference(PREFERENCE_WARMUP_TIME_KEY).setSummary(getPreferenceScreen().getSharedPreferences().getString(PREFERENCE_WARMUP_TIME_KEY, "") + " minutes");
+            findPreference(PREFERENCE_COOLDOWN_TIME_KEY).setSummary(getPreferenceScreen().getSharedPreferences().getString(PREFERENCE_COOLDOWN_TIME_KEY, "") + " minutes");
         }
         
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         	if (key.equals(PREFERENCE_FTP_KEY)) {
-                Preference ftpPref = findPreference(key);
+                Preference pref = findPreference(key);
                 // Set summary to be the user-description for the selected value
-                ftpPref.setSummary(sharedPreferences.getString(key, "") + " Watts");
+                pref.setSummary(sharedPreferences.getString(key, "") + " Watts");
             }
         	else if (key.equals(PREFERENCE_MAXHR_KEY)) {
-                Preference hrPref = findPreference(key);
+                Preference pref = findPreference(key);
                 // Set summary to be the user-description for the selected value
-                hrPref.setSummary(sharedPreferences.getString(key, "") + " bpm");
+                pref.setSummary(sharedPreferences.getString(key, "") + " bpm");
+            }
+        	else if (key.equals(PREFERENCE_WARMUP_TIME_KEY) || key.equals(PREFERENCE_COOLDOWN_TIME_KEY)) {
+                Preference pref = findPreference(key);
+                // Set summary to be the user-description for the selected value
+                pref.setSummary(sharedPreferences.getString(key, "") + " minutes");
             }
         }
         

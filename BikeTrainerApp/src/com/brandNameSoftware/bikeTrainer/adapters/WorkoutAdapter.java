@@ -47,22 +47,54 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
 
 	@Override
 	public void onBindViewHolder(WorkoutViewHolder viewHolder, int position) {
-		viewHolder.txtViewZone.setText(Integer.toString(workoutSets.get(position).getTargetZone()));
-		viewHolder.txtViewRepTime.setText(WorkoutMaths.formatMillisAsTime(workoutSets.get(position).getTimePerRep() * 1000));
-		viewHolder.txtViewRestTime.setText(WorkoutMaths.formatMillisAsTime(workoutSets.get(position).getRestTimePerRep() * 1000));
-	
-		WorkoutConstraints currentConstraint = workoutConstraints.get(workoutSets.get(position).getTargetZone());
-		viewHolder.txtViewFTP.setText(DisplayHelper.getFTPUserPrefDisplayRange(currentConstraint.getMinPower(), currentConstraint.getMaxPower(), this.userPrefs));
-		viewHolder.txtViewReps.setText(Integer.toString(workoutSets.get(position).getNumberOfReps()));
-		viewHolder.txtViewHR.setText(DisplayHelper.getHRUserPrefDisplayRange(currentConstraint.getMinHR(), currentConstraint.getMaxHR(), this.userPrefs));
-		
-		//this is the only way I could figure out how to paint the background of the FIRST working rep. Everything else is handled in the DisplayWorkoutActivity
-		if(position == 0 && isWorkingRep && activeIndex == 0)
+		//position 0 is the warmup. last position is the cooldown
+		if(position != 0 && position != (this.getItemCount() - 1))
 		{
+			viewHolder.txtViewZone.setText(Integer.toString(workoutSets.get(position).getTargetZone()));
+			viewHolder.txtViewRepTime.setText(WorkoutMaths.formatMillisAsTime(workoutSets.get(position).getTimePerRep() * 1000));
+			viewHolder.txtViewRestTime.setText(WorkoutMaths.formatMillisAsTime(workoutSets.get(position).getRestTimePerRep() * 1000));
+		
+			WorkoutConstraints currentConstraint = workoutConstraints.get(workoutSets.get(position).getTargetZone());
+			viewHolder.txtViewFTP.setText(DisplayHelper.getFTPUserPrefDisplayRange(currentConstraint.getMinPower(), currentConstraint.getMaxPower(), this.userPrefs));
+			viewHolder.txtViewReps.setText(Integer.toString(workoutSets.get(position).getNumberOfReps()));
+			viewHolder.txtViewHR.setText(DisplayHelper.getHRUserPrefDisplayRange(currentConstraint.getMinHR(), currentConstraint.getMaxHR(), this.userPrefs));
+		}
+		else if(position == 0 && isWorkingRep && activeIndex == 0)
+		{
+			//this is the only way I could figure out how to paint the background of the FIRST working rep. Everything else is handled in the DisplayWorkoutActivity
 			viewHolder.layoutWorkingDescription.setBackground(viewHolder.activeColor);
+			
+			createWarmupCard(viewHolder);
+		}
+		else if(position == (this.getItemCount() - 1))
+		{
+			createCoolDownCard(viewHolder);
 		}
 	}
 	
+	private void createCoolDownCard(WorkoutViewHolder viewHolder) {
+		viewHolder.txtViewZone.setText("Cooldown");
+		viewHolder.txtViewZone.setTextSize(30);
+		viewHolder.txtViewRepTime.setText(WorkoutMaths.formatMillisAsTime(this.userPrefs.getCoolDownTime() * 60 * 1000));
+		viewHolder.txtViewRestTime.setText(WorkoutMaths.formatMillisAsTime(0));
+	
+		viewHolder.txtViewFTP.setText("N/A");
+		viewHolder.txtViewReps.setText("1");
+		viewHolder.txtViewHR.setText("N/A");
+	}
+
+	private void createWarmupCard(WorkoutViewHolder viewHolder)
+	{
+		viewHolder.txtViewZone.setText("Warmup");
+		viewHolder.txtViewZone.setTextSize(30);
+		viewHolder.txtViewRepTime.setText(WorkoutMaths.formatMillisAsTime(this.userPrefs.getWarmupTime() * 60 * 1000));
+		viewHolder.txtViewRestTime.setText(WorkoutMaths.formatMillisAsTime(0));
+	
+		viewHolder.txtViewFTP.setText("N/A");
+		viewHolder.txtViewReps.setText("1");
+		viewHolder.txtViewHR.setText("N/A");
+	}
+
 	@Override
 	public WorkoutViewHolder onCreateViewHolder(ViewGroup viewGroup, int arg1) {
 		View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_workout_set, viewGroup, false);

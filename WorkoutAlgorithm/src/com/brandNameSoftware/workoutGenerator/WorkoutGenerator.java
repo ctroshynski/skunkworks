@@ -44,6 +44,7 @@ public class WorkoutGenerator
 		//Loop through the various set types trying to fill in the workout. Not exactly efficient but it only needs to hit 5 numbers randomly
 		while(totalTimePerZone.size() < 6 && remainingSecondsInBonusZone > 0)
 		{
+			//TODO: should allow the workout to have zone 1 if the user chooses so
 			int randomZone = WorkoutMaths.randInt(2, 7);
 			numberofSets = WorkoutMaths.randInt(1, 10);
 
@@ -54,6 +55,7 @@ public class WorkoutGenerator
 				mainSets.addAll(bonusSet);
 				remainingSecondsInBonusZone -= totalTimePerZone.get(randomZone);
 			}
+			//TODO: I think I should allow the primary zone to happen multiple times.
 			//add more time to the main set time. Goal is to reduce zone 7 sets
 			/*else if(randomZone == this.workoutPrefs.getZone())
 			{

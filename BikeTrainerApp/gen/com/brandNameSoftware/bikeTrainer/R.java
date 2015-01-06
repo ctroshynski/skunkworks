@@ -1821,7 +1821,7 @@ containing a value of this type.
         public static final int beginning=0x7f0a001b;
         public static final int bottom=0x7f0a001e;
         public static final int btnStartWorkout=0x7f0a0046;
-        public static final int card_view=0x7f0a0047;
+        public static final int cardsMainSet=0x7f0a0047;
         public static final int checkbox=0x7f0a002b;
         public static final int collapseActionView=0x7f0a0015;
         public static final int decor_content_parent=0x7f0a0031;
@@ -1949,7 +1949,7 @@ containing a value of this type.
         public static final int main=0x7f0e0001;
     }
     public static final class string {
-        public static final int RepCountdownRemaining=0x7f0b001d;
+        public static final int RepCountdownRemaining=0x7f0b0016;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f0b0001;
@@ -2003,36 +2003,31 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000d;
-        public static final int action_settings=0x7f0b0019;
+        public static final int action_settings=0x7f0b0012;
         public static final int app_name=0x7f0b000f;
-        public static final int button_send=0x7f0b0018;
-        public static final int enter_time=0x7f0b0017;
-        public static final int lblFTP=0x7f0b0020;
-        public static final int lblHR=0x7f0b0021;
-        public static final int lblPrefDisplayTypeHeader=0x7f0b002a;
-        public static final int lblPrefDisplayTypeSummary=0x7f0b002b;
+        public static final int button_send=0x7f0b0011;
+        public static final int enter_time=0x7f0b0010;
+        public static final int lblFTP=0x7f0b0019;
+        public static final int lblHR=0x7f0b001a;
+        public static final int lblPrefCooldownTimeHeader=0x7f0b0026;
+        public static final int lblPrefDisplayTypeHeader=0x7f0b0023;
+        public static final int lblPrefDisplayTypeSummary=0x7f0b0024;
         /**  Preferences Strings 
          */
-        public static final int lblPrefFTPHeader=0x7f0b0026;
-        public static final int lblPrefFTPSummary=0x7f0b0027;
-        public static final int lblPrefHRHeader=0x7f0b0028;
-        public static final int lblPrefHRSummary=0x7f0b0029;
-        public static final int lblRPM=0x7f0b0022;
-        public static final int lblRepTime=0x7f0b0024;
-        public static final int lblReps=0x7f0b0023;
-        public static final int lblRestTime=0x7f0b0025;
-        public static final int lblTotalCountdownRemaining=0x7f0b001e;
-        public static final int lblZone=0x7f0b001f;
-        public static final int title_activity_display_workout=0x7f0b001b;
-        public static final int title_activity_main=0x7f0b001a;
-        public static final int title_activity_preferences=0x7f0b001c;
-        public static final int zone1=0x7f0b0010;
-        public static final int zone2=0x7f0b0011;
-        public static final int zone3=0x7f0b0012;
-        public static final int zone4=0x7f0b0013;
-        public static final int zone5=0x7f0b0014;
-        public static final int zone6=0x7f0b0015;
-        public static final int zone7=0x7f0b0016;
+        public static final int lblPrefFTPHeader=0x7f0b001f;
+        public static final int lblPrefFTPSummary=0x7f0b0020;
+        public static final int lblPrefHRHeader=0x7f0b0021;
+        public static final int lblPrefHRSummary=0x7f0b0022;
+        public static final int lblPrefWarmupTimeHeader=0x7f0b0025;
+        public static final int lblRPM=0x7f0b001b;
+        public static final int lblRepTime=0x7f0b001d;
+        public static final int lblReps=0x7f0b001c;
+        public static final int lblRestTime=0x7f0b001e;
+        public static final int lblTotalCountdownRemaining=0x7f0b0017;
+        public static final int lblZone=0x7f0b0018;
+        public static final int title_activity_display_workout=0x7f0b0014;
+        public static final int title_activity_main=0x7f0b0013;
+        public static final int title_activity_preferences=0x7f0b0015;
     }
     public static final class style {
         /** 
