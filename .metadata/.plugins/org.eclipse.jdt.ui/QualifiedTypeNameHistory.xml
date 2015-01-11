@@ -14,7 +14,6 @@
 <fullyQualifiedTypeName name="android.graphics.drawable.ColorDrawable"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.R.color"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.DisplayWorkoutActivity"/>
-<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.AppPreferencesActivity"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.utils.DisplayHelper"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
@@ -25,4 +24,7 @@
 <fullyQualifiedTypeName name="android.content.SharedPreferences.OnSharedPreferenceChangeListener"/>
 <fullyQualifiedTypeName name="android.preference.Preference"/>
 <fullyQualifiedTypeName name="android.widget.LinearLayout"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutSet"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.AppPreferencesActivity"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

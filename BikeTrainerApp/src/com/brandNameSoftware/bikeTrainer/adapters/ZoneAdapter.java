@@ -48,7 +48,7 @@ public class ZoneAdapter extends BaseAdapter {
 
 			WorkoutConstraints currentConstraint = getItem(position);
 			
-			txtViewZoneHeader.setText("Zone " + currentConstraint.getZone());
+			txtViewZoneHeader.setText("Zone " + currentConstraint.getZone() + " - " + currentConstraint.getDescription());
 			txtViewZoneDetails.setText("Power - " + DisplayHelper.getFTPPercentageDisplayRange(currentConstraint.getMinPower(), currentConstraint.getMaxPower()) + "    HR - " + 
 					DisplayHelper.getHRPercentageDisplayRange(currentConstraint.getMinHR(), currentConstraint.getMaxHR()));
 		}

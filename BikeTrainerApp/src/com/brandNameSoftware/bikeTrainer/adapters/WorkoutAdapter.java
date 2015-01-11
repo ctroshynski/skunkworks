@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.brandNameSoftware.bikeTrainer.R;
 import com.brandNameSoftware.bikeTrainer.beans.UserPrefs;
@@ -48,7 +46,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
 	@Override
 	public void onBindViewHolder(WorkoutViewHolder viewHolder, int position) {
 		//position 0 is the warmup. last position is the cooldown
-		if(position != 0 && position != (this.getItemCount() - 1))
+		if((position != 0 && position != (this.getItemCount() - 1)))
 		{
 			viewHolder.txtViewZone.setText(Integer.toString(workoutSets.get(position).getTargetZone()));
 			viewHolder.txtViewRepTime.setText(WorkoutMaths.formatMillisAsTime(workoutSets.get(position).getTimePerRep() * 1000));
@@ -58,17 +56,54 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
 			viewHolder.txtViewFTP.setText(DisplayHelper.getFTPUserPrefDisplayRange(currentConstraint.getMinPower(), currentConstraint.getMaxPower(), this.userPrefs));
 			viewHolder.txtViewReps.setText(Integer.toString(workoutSets.get(position).getNumberOfReps()));
 			viewHolder.txtViewHR.setText(DisplayHelper.getHRUserPrefDisplayRange(currentConstraint.getMinHR(), currentConstraint.getMaxHR(), this.userPrefs));
+			
+			
 		}
-		else if(position == 0 && isWorkingRep && activeIndex == 0)
+		else if(position == 0)
 		{
+			
 			//this is the only way I could figure out how to paint the background of the FIRST working rep. Everything else is handled in the DisplayWorkoutActivity
-			viewHolder.layoutWorkingDescription.setBackground(viewHolder.activeColor);
+			/*if(isWorkingRep && activeIndex == 0)
+			{
+				viewHolder.layoutWorkingDescription.setBackground(viewHolder.activeColor);
+			}
+			else if(isWorkingRep && activeIndex == 1)
+			{
+				//need to set this transparent since we've incrmented
+				viewHolder.layoutWorkingDescription.setBackground(viewHolder.passiveColor);
+			}*/
 			
 			createWarmupCard(viewHolder);
 		}
 		else if(position == (this.getItemCount() - 1))
 		{
 			createCoolDownCard(viewHolder);
+		}
+		
+		//isIncremented is always false because the incrementing doesn't happen from here
+		//DisplayHelper.setActiveBackgroundColor(viewHolder.itemView, activeIndex, isWorkingRep, false);
+		setScrollyBackgroundColor(position, activeIndex, isWorkingRep, viewHolder);
+	}
+	
+	private void setScrollyBackgroundColor(int cardIndex, int activeIndex, boolean isWorkingRep, WorkoutViewHolder viewHolder)
+	{
+		if(activeIndex == cardIndex)
+		{
+			if(isWorkingRep)
+			{
+				viewHolder.layoutWorkingDescription.setBackgroundColor(viewHolder.activeColor);
+				viewHolder.layoutRestDescription.setBackground(viewHolder.passiveTopBorderDrawable);
+			}
+			else
+			{
+				viewHolder.layoutWorkingDescription.setBackground(viewHolder.passiveDrawable);
+				viewHolder.layoutRestDescription.setBackgroundColor(viewHolder.activeColor);
+			}
+		}
+		else
+		{
+			viewHolder.layoutWorkingDescription.setBackgroundColor(viewHolder.passiveColor);
+			viewHolder.layoutRestDescription.setBackground(viewHolder.passiveTopBorderDrawable);
 		}
 	}
 	

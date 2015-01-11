@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.brandNameSoftware.bikeTrainer.adapters.WorkoutAdapter;
 import com.brandNameSoftware.bikeTrainer.beans.UserPrefs;
+import com.brandNameSoftware.bikeTrainer.utils.DisplayHelper;
 import com.brandNameSoftware.workoutGenerator.WorkoutGenerator;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutConstraints;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutPrefs;
@@ -36,6 +37,7 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 	ArrayList<WorkoutSet> workoutSets = null;
 	HashMap<Integer, WorkoutConstraints> workoutConstraints = null;
 	UserPrefs userPrefs = null;
+	CountDownTimer totalWorkoutTimer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +57,8 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		totalCounTextView.setText(Integer.toString(workoutPrefs.getTime()));
 
 		
-		CountDownTimer totalWorkoutTimer = setupTimer(workoutSets);
-		totalWorkoutTimer.start();
-	}
-	
-	@Override
-	protected void onResume()
-	{		
-		readUserPrefs();
+		
+
 		
 		RecyclerView listViewWorkoutSets = (RecyclerView) findViewById(R.id.listViewWorkoutSets);
 		
@@ -72,7 +68,26 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		workoutAdapter = new WorkoutAdapter(this, this.workoutSets, this.workoutConstraints, userPrefs);
 		listViewWorkoutSets.setAdapter(workoutAdapter);
 		
+		
+		
+		this.totalWorkoutTimer = setupTimer(workoutSets);
+		this.totalWorkoutTimer.start();
+	}
+	
+	@Override
+	protected void onResume()
+	{		
+		readUserPrefs();
+		
 		super.onResume();
+	}
+	
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+		
+		this.totalWorkoutTimer.cancel();
 	}
 	
 	private void readUserPrefs()
@@ -118,6 +133,7 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		warmupSet.setRestTimePerRep(0);
 		warmupSet.setTargetZone(0);
 		warmupSet.setTimePerRep(this.userPrefs.getWarmupTime() * 60);
+		//warmupSet.setTimePerRep(10);
 		workoutSets.add(0, warmupSet);
 		
 		//add a dummy cooldown set to the beginning
@@ -154,47 +170,6 @@ public class DisplayWorkoutActivity extends ActionBarActivity
   
         return true;
     }
-	
-	private void setActiveBackgroundColor(int currentSetIndex, boolean isWorkingSet, boolean wasSetIncremented)
-	{
-		RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listViewWorkoutSets);
-		LinearLayoutManager layoutManager = (LinearLayoutManager)recyclerView.getLayoutManager();
-		CardView currentCard = null;
-		
-		if(layoutManager.findFirstVisibleItemPosition() <= currentSetIndex && layoutManager.findLastVisibleItemPosition() >= currentSetIndex)
-		{
-			//if the card isn't visible, then we can't find it in the layout manager
-			currentCard = (CardView)layoutManager.findViewByPosition(currentSetIndex);
-			
-			ViewGroup currentLayout = null;
-			ViewGroup previousLayout = null;
-			Drawable previousBackground = null;
-			currentCard = (CardView)recyclerView.getLayoutManager().findViewByPosition(currentSetIndex);
-			
-			if(isWorkingSet)
-			{
-				currentLayout = (ViewGroup)currentCard.findViewById(R.id.layoutWorkoutDetails);
-				
-				if(wasSetIncremented)
-				{
-					//have to get the previous card if we moved sets
-					currentCard = (CardView)recyclerView.getLayoutManager().findViewByPosition(currentSetIndex - 1);
-				}
-				
-				previousLayout = (ViewGroup)currentCard.findViewById(R.id.layoutRest);
-				previousBackground = getResources().getDrawable(R.drawable.layout_top_border);
-			}
-			else
-			{
-				currentLayout = (ViewGroup)currentCard.findViewById(R.id.layoutRest);
-				previousLayout = (ViewGroup)currentCard.findViewById(R.id.layoutWorkoutDetails);
-				previousBackground = new ColorDrawable(getResources().getColor(R.color.transparent));
-			}
-			
-			currentLayout.setBackgroundColor(getResources().getColor(R.color.accent_transparent));
-			previousLayout.setBackground(previousBackground);
-		}
-	}
 	
 	public class WorkoutCountDownTimer extends CountDownTimer
 	{
@@ -268,7 +243,7 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 
 				workoutAdapter.setWorkingRep(isWorkingSet);
 				workoutAdapter.setActiveIndex(currentSetIndex);
-				setActiveBackgroundColor(currentSetIndex, isWorkingSet, isSetIncremented);
+				DisplayHelper.setActiveBackgroundColor((RecyclerView) findViewById(R.id.listViewWorkoutSets), currentSetIndex, isWorkingSet, isSetIncremented);
 			}
 			
 			repCountTextView.setText(WorkoutMaths.formatMillisAsTime(remainingRepTimeMillis));
