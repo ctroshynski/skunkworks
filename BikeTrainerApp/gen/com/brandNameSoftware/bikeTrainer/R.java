@@ -1800,6 +1800,8 @@ containing a value of this type.
         public static final int layout_bottom_border=0x7f020034;
         public static final int layout_top_border=0x7f020035;
         public static final int list_selector=0x7f020036;
+        public static final int pause=0x7f020037;
+        public static final int play=0x7f020038;
     }
     public static final class id {
         public static final int action_bar=0x7f0a0033;
@@ -1815,13 +1817,13 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0030;
         public static final int action_mode_bar_stub=0x7f0a002f;
         public static final int action_mode_close_button=0x7f0a0022;
-        public static final int action_settings=0x7f0a0055;
+        public static final int action_settings=0x7f0a0056;
         public static final int activity_chooser_view_content=0x7f0a0023;
         public static final int always=0x7f0a0014;
         public static final int beginning=0x7f0a001b;
         public static final int bottom=0x7f0a001e;
-        public static final int btnStartWorkout=0x7f0a0046;
-        public static final int cardsMainSet=0x7f0a0047;
+        public static final int btnStartWorkout=0x7f0a0047;
+        public static final int cardsMainSet=0x7f0a0048;
         public static final int checkbox=0x7f0a002b;
         public static final int collapseActionView=0x7f0a0015;
         public static final int decor_content_parent=0x7f0a0031;
@@ -1829,7 +1831,7 @@ containing a value of this type.
         public static final int dialog=0x7f0a0019;
         public static final int disableHome=0x7f0a000d;
         public static final int dropdown=0x7f0a001a;
-        public static final int editTxtTime=0x7f0a0044;
+        public static final int editTxtTime=0x7f0a0045;
         public static final int edit_query=0x7f0a0035;
         public static final int end=0x7f0a001c;
         public static final int expand_activities_button=0x7f0a0024;
@@ -1839,11 +1841,12 @@ containing a value of this type.
         public static final int icon=0x7f0a0028;
         public static final int ifRoom=0x7f0a0016;
         public static final int image=0x7f0a0025;
-        public static final int layoutActiveWorkout=0x7f0a0049;
-        public static final int layoutRest=0x7f0a0051;
-        public static final int layoutWorkoutDetails=0x7f0a004c;
+        public static final int imgBtnPlayPause=0x7f0a0042;
+        public static final int layoutActiveWorkout=0x7f0a004a;
+        public static final int layoutRest=0x7f0a0052;
+        public static final int layoutWorkoutDetails=0x7f0a004d;
         public static final int listMode=0x7f0a000a;
-        public static final int listViewWorkoutSets=0x7f0a0043;
+        public static final int listViewWorkoutSets=0x7f0a0044;
         public static final int list_item=0x7f0a0027;
         public static final int middle=0x7f0a001d;
         public static final int never=0x7f0a0017;
@@ -1871,23 +1874,23 @@ containing a value of this type.
         public static final int tabMode=0x7f0a000c;
         public static final int title=0x7f0a0029;
         public static final int top=0x7f0a001f;
-        public static final int txtLblFTP=0x7f0a004e;
-        public static final int txtViewFTP=0x7f0a004f;
-        public static final int txtViewHR=0x7f0a0050;
+        public static final int txtLblFTP=0x7f0a004f;
+        public static final int txtViewFTP=0x7f0a0050;
+        public static final int txtViewHR=0x7f0a0051;
         public static final int txtViewRepCountdown=0x7f0a0041;
-        public static final int txtViewRepTime=0x7f0a004d;
-        public static final int txtViewReps=0x7f0a0048;
-        public static final int txtViewRestTime=0x7f0a0052;
-        public static final int txtViewTotalCountdown=0x7f0a0042;
-        public static final int txtViewZone=0x7f0a004b;
-        public static final int txtViewZoneLbl=0x7f0a004a;
-        public static final int txtViewZoneLine1=0x7f0a0053;
-        public static final int txtViewZoneLine2=0x7f0a0054;
+        public static final int txtViewRepTime=0x7f0a004e;
+        public static final int txtViewReps=0x7f0a0049;
+        public static final int txtViewRestTime=0x7f0a0053;
+        public static final int txtViewTotalCountdown=0x7f0a0043;
+        public static final int txtViewZone=0x7f0a004c;
+        public static final int txtViewZoneLbl=0x7f0a004b;
+        public static final int txtViewZoneLine1=0x7f0a0054;
+        public static final int txtViewZoneLine2=0x7f0a0055;
         public static final int up=0x7f0a0001;
         public static final int useLogo=0x7f0a0013;
         public static final int withText=0x7f0a0018;
         public static final int wrap_content=0x7f0a0009;
-        public static final int zoneList=0x7f0a0045;
+        public static final int zoneList=0x7f0a0046;
     }
     public static final class integer {
         /**  The maximum number of action buttons that should be permitted within

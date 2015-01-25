@@ -65,15 +65,63 @@
 		<item value="false" key="create_package_info_java"/>
 	</section>
 	<section name="JavaSearchPage">
-		<item value="1" key="HISTORY_SIZE"/>
+		<item value="5" key="HISTORY_SIZE"/>
 		<item value="false" key="CASE_SENSITIVE"/>
 		<item value="11" key="INCLUDE_MASK"/>
-		<section name="HISTORY0">
+		<section name="HISTORY4">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.utils{DisplayHelper.java[DisplayHelper~getHRPercentageDisplayRange~I~I" key="javaElement"/>
 			<item value="0" key="scope"/>
 			<item value="11" key="includeMask"/>
 			<item value="com.brandNameSoftware.bikeTrainer.utils.DisplayHelper.getHRPercentageDisplayRange(int, int)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY2">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.adapters{WorkoutViewHolder.java[WorkoutViewHolder^activeColor" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.brandNameSoftware.bikeTrainer.adapters.WorkoutViewHolder.activeColor" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="4" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY3">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=BikeTrainerApp/gen&lt;com.brandNameSoftware.bikeTrainer{R.java[R[color^accent_transparent" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.brandNameSoftware.bikeTrainer.R.color.accent_transparent" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="4" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY0">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.brandNameSoftware.bikeTrainer.DisplayWorkoutActivity.setActiveBackgroundColor(int, boolean, boolean)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.adapters{WorkoutAdapter.java[WorkoutAdapter~setActiveIndex~I" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.brandNameSoftware.bikeTrainer.adapters.WorkoutAdapter.setActiveIndex(int)" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
 			<item value="1" key="searchFor"/>

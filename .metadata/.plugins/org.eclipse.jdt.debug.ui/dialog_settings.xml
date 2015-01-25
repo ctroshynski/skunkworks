@@ -5,5 +5,14 @@
 	<item value="188" key="org.eclipse.jdt.debug.ui.jre_preference_page_context.columnWidth1"/>
 	<item value="115" key="org.eclipse.jdt.debug.ui.jre_preference_page_context.columnWidth0"/>
 	<section name="conditionHistory">
+		<item value="currentCard == null" key="conditionHistoryEntry_6"/>
+		<item value="currentCard==null" key="conditionHistoryEntry_7"/>
+		<item value="5" key="conditionHistoryEntryCount"/>
+		<item value="cardIndex == (this.getItemCount() - 1)" key="conditionHistoryEntry_0"/>
+		<item value="cardIndex == 0" key="conditionHistoryEntry_1"/>
+		<item value="cardIndex == (this.getItemCount() - 2)" key="conditionHistoryEntry_4"/>
+		<item value="position == (this.getItemCount() - 1)" key="conditionHistoryEntry_5"/>
+		<item value="layoutManager.getPosition(currentCard) != currentSetIndex" key="conditionHistoryEntry_2"/>
+		<item value="cardIndex == (this.getItemCount() - 3)" key="conditionHistoryEntry_3"/>
 	</section>
 </section>

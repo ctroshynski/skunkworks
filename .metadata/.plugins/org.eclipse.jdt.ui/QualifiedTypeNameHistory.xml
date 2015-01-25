@@ -15,7 +15,6 @@
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.R.color"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.DisplayWorkoutActivity"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
-<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.utils.DisplayHelper"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.beans.UserPrefs"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.R.id"/>
@@ -27,4 +26,9 @@
 <fullyQualifiedTypeName name="com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutSet"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.AppPreferencesActivity"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.utils.DisplayHelper"/>
+<fullyQualifiedTypeName name="android.widget.ImageButton"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.utils.WorkoutHelper"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.DisplayWorkoutActivity.WorkoutCountDownTimer"/>
 </qualifiedTypeNameHistroy>
