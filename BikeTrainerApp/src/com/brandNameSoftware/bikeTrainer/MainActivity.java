@@ -21,9 +21,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.brandNameSoftware.bikeTrainer.adapters.ZoneAdapter;
+import com.brandNameSoftware.bikeTrainer.utils.AnalyticsApplication;
 import com.brandNameSoftware.workoutGenerator.ImportPrefs;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutConstraints;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutPrefs;
+import com.google.android.gms.analytics.GoogleAnalytics;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -35,7 +37,11 @@ public class MainActivity extends ActionBarActivity {
 	HashMap<Integer, WorkoutConstraints> workoutConstraints;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+    	//Get a Tracker (should auto-report)
+    	((AnalyticsApplication) getApplication()).getTracker(AnalyticsApplication.TrackerName.APP_TRACKER);
+    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 		this.workoutConstraints = readWorkoutConstraints();
@@ -89,6 +95,22 @@ public class MainActivity extends ActionBarActivity {
 				
 			}
 		});
+    }
+    
+    @Override
+    public void onStart()
+    {
+    	//Get an Analytics tracker to report app starts and uncaught exceptions etc.
+    	GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    	super.onStart();
+    }
+    
+    @Override
+    public void onStop()
+    {
+    	//Stop the analytics tracking
+    	GoogleAnalytics.getInstance(this).reportActivityStop(this);
+    	super.onStop();
     }
 
     @Override

@@ -61,18 +61,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
 		}
 		else if(position == 0)
 		{
-			
-			//this is the only way I could figure out how to paint the background of the FIRST working rep. Everything else is handled in the DisplayWorkoutActivity
-			/*if(isWorkingRep && activeIndex == 0)
-			{
-				viewHolder.layoutWorkingDescription.setBackground(viewHolder.activeColor);
-			}
-			else if(isWorkingRep && activeIndex == 1)
-			{
-				//need to set this transparent since we've incrmented
-				viewHolder.layoutWorkingDescription.setBackground(viewHolder.passiveColor);
-			}*/
-			
 			createWarmupCard(viewHolder);
 		}
 		else if(position == (this.getItemCount() - 1))
@@ -150,5 +138,13 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
 
 	public void setWorkingRep(boolean isWorkingRep) {
 		this.isWorkingRep = isWorkingRep;
+	}
+
+	public UserPrefs getUserPrefs() {
+		return userPrefs;
+	}
+
+	public void setUserPrefs(UserPrefs userPrefs) {
+		this.userPrefs = userPrefs;
 	}
 }

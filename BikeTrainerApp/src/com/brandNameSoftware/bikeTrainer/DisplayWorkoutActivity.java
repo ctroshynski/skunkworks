@@ -23,12 +23,14 @@ import android.widget.TextView;
 
 import com.brandNameSoftware.bikeTrainer.adapters.WorkoutAdapter;
 import com.brandNameSoftware.bikeTrainer.beans.UserPrefs;
+import com.brandNameSoftware.bikeTrainer.utils.AnalyticsApplication;
 import com.brandNameSoftware.bikeTrainer.utils.DisplayHelper;
 import com.brandNameSoftware.bikeTrainer.utils.WorkoutHelper;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutConstraints;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutPrefs;
 import com.brandNameSoftware.workoutGenerator.datacontainer.WorkoutSet;
 import com.brandNameSoftware.workoutGenerator.utils.WorkoutMaths;
+import com.google.android.gms.analytics.GoogleAnalytics;
 
 public class DisplayWorkoutActivity extends ActionBarActivity
 {
@@ -42,7 +44,11 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 	long remainingTimeInWorkoutMillis = 0;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		//Get a Tracker (should auto-report)
+    	((AnalyticsApplication) getApplication()).getTracker(AnalyticsApplication.TrackerName.APP_TRACKER);
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_workout);
 	    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -61,19 +67,21 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		addListenerOnPlayPauseButton();
 		
 		setupAndStartTimer(WorkoutHelper.calculateTotalWorkoutTimeSecs(workoutSets)*1000, true);
+
+		RecyclerView listViewWorkoutSets = (RecyclerView) findViewById(R.id.listViewWorkoutSets);
+		listViewWorkoutSets.setLayoutManager(new LinearLayoutManager(this));
+		listViewWorkoutSets.setItemAnimator(new DefaultItemAnimator());
+		workoutAdapter = new WorkoutAdapter(this, this.workoutSets, this.workoutConstraints, userPrefs);
+		listViewWorkoutSets.setAdapter(workoutAdapter);
 	}
 	
 	@Override
 	protected void onResume()
 	{		
 		readUserPrefs();
-		RecyclerView listViewWorkoutSets = (RecyclerView) findViewById(R.id.listViewWorkoutSets);
 		
-		listViewWorkoutSets.setLayoutManager(new LinearLayoutManager(this));
-		listViewWorkoutSets.setItemAnimator(new DefaultItemAnimator());
-		
-		workoutAdapter = new WorkoutAdapter(this, this.workoutSets, this.workoutConstraints, userPrefs);
-		listViewWorkoutSets.setAdapter(workoutAdapter);
+		workoutAdapter.setUserPrefs(this.userPrefs);
+		workoutAdapter.notifyDataSetChanged();
 		
 		super.onResume();
 	}
@@ -85,6 +93,22 @@ public class DisplayWorkoutActivity extends ActionBarActivity
 		
 		this.totalWorkoutTimer.cancel();
 	}
+    
+    @Override
+    public void onStart()
+    {
+    	//Get an Analytics tracker to report app starts and uncaught exceptions etc.
+    	GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    	super.onStart();
+    }
+    
+    @Override
+    public void onStop()
+    {
+    	//Stop the analytics tracking
+    	GoogleAnalytics.getInstance(this).reportActivityStop(this);
+    	super.onStop();
+    }
 	
 	private void readUserPrefs()
 	{

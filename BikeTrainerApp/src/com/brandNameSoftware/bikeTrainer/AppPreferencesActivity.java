@@ -1,5 +1,8 @@
 package com.brandNameSoftware.bikeTrainer;
 
+import com.brandNameSoftware.bikeTrainer.utils.AnalyticsApplication;
+import com.google.android.gms.analytics.GoogleAnalytics;
+
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -15,7 +18,11 @@ public class AppPreferencesActivity extends PreferenceActivity {
 	public static final String PREFERENCE_WARMUP_TIME_KEY = "prefwarmupTime";
 	public static final String PREFERENCE_COOLDOWN_TIME_KEY = "prefcooldownTime";
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		//Get a Tracker (should auto-report)
+    	((AnalyticsApplication) getApplication()).getTracker(AnalyticsApplication.TrackerName.APP_TRACKER);
+    	
 		super.onCreate(savedInstanceState);
 		getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new FTPValueFragment()).commit();
@@ -54,8 +61,8 @@ public class AppPreferencesActivity extends PreferenceActivity {
         }
         
         @Override
-		public void onResume() {
-            // TODO Auto-generated method stub
+		public void onResume()
+        {
             super.onResume();
             getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
         }
@@ -64,12 +71,28 @@ public class AppPreferencesActivity extends PreferenceActivity {
          * @see android.app.Activity#onPause()
          */
         @Override
-		public void onPause() {
-            // TODO Auto-generated method stub
+		public void onPause()
+        {
             super.onPause();
 
-            getPreferenceScreen().getSharedPreferences()
-            .unregisterOnSharedPreferenceChangeListener(this);
+            getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         }
+    }
+
+    
+    @Override
+    public void onStart()
+    {
+    	//Get an Analytics tracker to report app starts and uncaught exceptions etc.
+    	GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    	super.onStart();
+    }
+    
+    @Override
+    public void onStop()
+    {
+    	//Stop the analytics tracking
+    	GoogleAnalytics.getInstance(this).reportActivityStop(this);
+    	super.onStop();
     }
 }
