@@ -31,4 +31,12 @@
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.utils.WorkoutHelper"/>
 <fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.DisplayWorkoutActivity.WorkoutCountDownTimer"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="com.google.android.gms.analytics.Logger"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.R"/>
+<fullyQualifiedTypeName name="com.brandNameSoftware.bikeTrainer.utils.AnalyticsApplication"/>
+<fullyQualifiedTypeName name="com.dsi.ant.AntSupportChecker"/>
+<fullyQualifiedTypeName name="android.view.animation.AnticipateInterpolator"/>
+<fullyQualifiedTypeName name="com.dsi.ant.plugins.antplus.pcc.AntPlusFitnessEquipmentPcc.Settings.Gender"/>
+<fullyQualifiedTypeName name="com.garmin.fit.Gender"/>
 </qualifiedTypeNameHistroy>

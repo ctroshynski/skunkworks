@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.adapters{WorkoutAdapter.java[WorkoutAdapter" modifiers="1" timestamp="1421013894930"/>
+<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.adapters{WorkoutAdapter.java[WorkoutAdapter" modifiers="1" timestamp="1422206983106"/>
 <typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.adapters{WorkoutViewHolder.java[WorkoutViewHolder" modifiers="1" timestamp="1421013542511"/>
-<typeInfo handle="=TestActivity/C:\/Users\/matthew.brand\/Documents\/Eclipes\/sdk\/platforms\/android-19\/android.jar&lt;android.widget(RelativeLayout.class[RelativeLayout" modifiers="33" timestamp="1416496517977"/>
 <typeInfo handle="=BikeTrainerApp/C:\/Users\/matthew.brand\/Documents\/Eclipes\/sdk\/platforms\/android-21\/android.jar&lt;android.preference(PreferenceActivity.class[PreferenceActivity" modifiers="1057" timestamp="1420047871668"/>
-<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer{AppPreferencesActivity.java[AppPreferencesActivity" modifiers="1" timestamp="1420509150523"/>
-<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer{MainActivity.java[MainActivity" modifiers="1" timestamp="1420413370120"/>
+<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer{AppPreferencesActivity.java[AppPreferencesActivity" modifiers="1" timestamp="1422223848489"/>
+<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer{MainActivity.java[MainActivity" modifiers="1" timestamp="1422221314686"/>
 <typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.adapters{ZoneAdapter.java[ZoneAdapter" modifiers="1" timestamp="1421013999680"/>
-<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer{DisplayWorkoutActivity.java[DisplayWorkoutActivity" modifiers="1" timestamp="1422118715750"/>
+<typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer{DisplayWorkoutActivity.java[DisplayWorkoutActivity" modifiers="1" timestamp="1422220915825"/>
 <typeInfo handle="=BikeTrainerApp/src&lt;com.brandNameSoftware.bikeTrainer.utils{DisplayHelper.java[DisplayHelper" modifiers="1" timestamp="1421012103252"/>
+<typeInfo handle="=BikeTrainerApp/C:\/Users\/matthew.brand\/Documents\/Eclipes\/sdk\/platforms\/android-21\/android.jar&lt;android.app(Application.class[Application" modifiers="33" timestamp="1420047871668"/>
 </typeInfoHistroy>
